@@ -1,0 +1,53 @@
+<div style="margin-bottom: 10px; width: 350px; display: flex; flex-direction: row; justify-content: center;">
+  <form [formGroup]="citaForm" (ngSubmit)="onSubmit()" style="display: flex; flex-direction: column;">
+    <label for="subject">Asunto:</label>
+    <input id="subject" formControlName="subject" />
+
+    <div formGroupName="body">
+      <label for="content">Descripción:</label>
+      <br>
+      <textarea id="content" formControlName="content"></textarea>
+    </div>
+
+    <div formGroupName="start">
+      <label for="startDateTime">Fecha y Hora de Inicio: <span style="color:red">*</span></label>
+      <br>
+      <input id="startDateTime" type="datetime-local" formControlName="dateTime" required />
+    </div>
+
+    <div formGroupName="end">
+      <label for="endDateTime">Fecha y Hora de Fin: <span style="color:red">*</span></label>
+      <br>
+      <input id="endDateTime" type="datetime-local" formControlName="dateTime" required />
+    </div>
+
+    <div formGroupName="location">
+      <label for="location">Ubicación:</label>
+      <br>
+      <input id="location" formControlName="displayName" />
+    </div>
+
+    <div formArrayName="attendees">
+      <button type="button" style="width: 100%;" (click)="addAttendee()">Agregar asistente</button>
+      <div *ngFor="let attendee of getAttendees().controls; let i = index" [formGroupName]="i" style="display: flex;">
+
+        <div formGroupName="emailAddress">
+          <input formControlName="name" placeholder="Nombre del asistente" type="text"/>
+          <input formControlName="address" placeholder="Email del asistente" type="email" required />
+        </div>
+
+        <select formControlName="type">
+          <option value="required">Requerido</option>
+          <option value="optional">Opcional</option>
+        </select>
+
+      </div>
+    </div>
+
+
+
+    <button style="width: auto;" type="submit" [disabled]="citaForm.invalid">
+      {{ editar ? 'Editar Cita' : 'Crear Cita' }}
+    </button>
+  </form>
+</div>

@@ -1,0 +1,58 @@
+# --- General --- #
+# Node and other dependencies
+node_modules/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+/.vscode/
+.DS_Store
+
+# Log files
+*.log
+
+# --- Angular: calendario-outlook-front --- #
+/calendario-outlook-front/node_modules/
+/calendario-outlook-front/dist/
+/calendario-outlook-front/src/environments/environment*.ts
+
+# Compiled TypeScript files
+/calendario-outlook-front/out-tsc/
+
+# Angular cache files
+.calendario-outlook-front/.angular/
+
+# --- .NET: calendario-outlook-backend --- #
+/calendario-outlook-backend/bin/
+/calendario-outlook-backend/obj/
+/calendario-outlook-backend/.vs/
+/calendario-outlook-backend/Properties/launchSettings.json
+
+# User-specific files
+/calendario-outlook-backend/*.user
+/calendario-outlook-backend/*.suo
+
+# ASP.NET, Entity Framework, NuGet and build artifacts
+/calendario-outlook-backend/.vs/
+/calendario-outlook-backend/packages/
+/calendario-outlook-backend/project.lock.json
+/calendario-outlook-backend/project.fragment.lock.json
+/calendario-outlook-backend/*.pdb
+/calendario-outlook-backend/*.cache
+/calendario-outlook-backend/*.dll
+/calendario-outlook-backend/*.exe
+
+# Logs and other transient files
+/calendario-outlook-backend/logs/
+
+# Ignore generated .NET environment settings
+/calendario-outlook-backend/appsettings.json
+
+# Rider, JetBrains IDE
+/calendario-outlook-backend/.idea/
+/calendario-outlook-backend/.Rider/
+
+# --- Common --- #
+# Ignore lock files
+**/package-lock.json
+**/yarn.lock

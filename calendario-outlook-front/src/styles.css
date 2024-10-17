@@ -1,0 +1,32 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  max-width: 1200px;
+  background-color: ghostwhite;
+}
+
+app-root {
+  display: flex;
+  justify-content: center;
+}
+
+app-sync-outlook {
+  width: 500px;
+  background-color: floralwhite;
+  padding: 16px;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-top: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+button {
+  background-color: white;
+  border-radius: 10px;
+  width: 125px;
+  margin: 10px 0;
+}

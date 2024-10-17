@@ -1,0 +1,16 @@
+<div >
+<ng-container *ngIf="citas.length > 0">
+  <div style="display: flex; flex-direction: column; align-items: center;">
+    <h2>Listado de citas</h2>
+    <ul >
+      <li *ngFor="let cita of citas">
+        {{cita.subject}} - {{cita.start.dateTime | date: 'medium'}}
+        <br>
+        <button (click)="editarCita(cita)">Editar</button>
+        - <button (click)="eliminarCita(cita.id)">Eliminar</button>
+      </li>
+
+    </ul>
+  </div>
+</ng-container>
+</div>

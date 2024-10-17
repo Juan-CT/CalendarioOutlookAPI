@@ -1,0 +1,13 @@
+<div style="display: flex; margin-bottom: 10px; flex-direction: column; align-items: center;">
+  <p *ngIf="!logueado">Para ver tus citas o crear una nueva, logueate primero</p>
+  <button *ngIf="!logueado" (click)="login()">Iniciar Sesión</button>
+
+  <div *ngIf="logueado" style="display: flex; margin-bottom: 10px; flex-direction: column; align-items: center;">
+    <button (click)="logout()">Cerrar sesión</button>
+
+    <app-form-cita #formCita (refrescarListaCitas)="tablaCitas.obtenerCitas()"></app-form-cita>
+
+    <app-tabla-citas #tablaCitas (editarCitaEvent)="formCita.cargarCita($event)"></app-tabla-citas>
+
+  </div>
+</div>

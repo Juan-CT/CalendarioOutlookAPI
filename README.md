@@ -18,8 +18,11 @@ Es necesario tener en Microsoft Entra ID una aplicación registrada con la sigui
 
 -Tipos de cuentas compatibles: Cuentas en cualquier directorio organizacional (cualquier inquilino 
 del id. de Microsoft Entra - multiinquilino) y cuentas personales de Microsoft (por ejemplo, Skype, Xbox).
--URI de redirección: Aplicación de página única - 'url local que ejecute Angular ej: <http://localhost:4200>.
+
+-URI de redirección: Aplicación de página única - 'url local que ejecute Angular ej: http: //localhost:4200.
+
 -Permisos de API: Calendars.ReadWrite, de tipo delegada, con permisos concedidos.
+
 -Autenticación: Permitir tokens de acceso e id.
 
 Se necesitará más adelante la ID de cliente e ID de inquilino, además del dominio principal del usuario.  

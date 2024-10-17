@@ -19,7 +19,7 @@ namespace CalendarioOutlook.Controllers
             this.logger = logger;
         }
 
-        //
+        // Método que devuelve todas las citas/eventos del calendario instructor
         [HttpGet("citas")]
         public async Task<ActionResult<List<Cita>>> obtenerCitas()
         {
@@ -71,21 +71,8 @@ namespace CalendarioOutlook.Controllers
 
             return Ok(citas);
         }
-
-        //
-        [HttpPost("crearcalendario")]
-        public async Task<IActionResult> CrearCalendario()
-        {
-            var graphClient = outlookService.graphServiceClient;
-
-            var requestBody = new Calendar
-            { Name = "Instructor" };
-
-            await graphClient.Me.Calendars.PostAsync(requestBody);
-            return Ok("Calendario creado");
-        }
-
-        //
+        
+        // Método que crea una cita/evento en el calendario instructor
         [HttpPost("crearcita")]
         public async Task<IActionResult> CrearCita([FromBody] CitaCreacion nuevaCita)
         {
@@ -133,7 +120,7 @@ namespace CalendarioOutlook.Controllers
 
         }
 
-        //
+        // Método que va a eliminar una cita/evento mediante su ID
         [HttpDelete("eliminarevento/{id}")]
         public async Task<IActionResult> EliminarCita(string id)
         {
@@ -144,7 +131,7 @@ namespace CalendarioOutlook.Controllers
             return Ok(new { message = "Exito" });
         }
 
-        //
+        // Método que va a editar una cita/evento mediante su ID
         [HttpPut("editarevento/{id}")]
         public async Task<IActionResult> EditarCita([FromBody] Cita cita, string id)
         {

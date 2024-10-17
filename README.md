@@ -4,7 +4,13 @@ Este proyecto es una aplicación web para gestionar citas utilizando la API de O
 Está dividido en dos partes: un frontend desarrollado con Angular12 y un backend en .NET6.
 
 La aplicación permite, mediante un login previo a la cuenta Microsoft del usuario, ver,
-crear, modificar o eliminar eventos del calendario de Outlook.
+crear, modificar o eliminar eventos en el calendario de Outlook.
+
+El diseño es muy básico, ya que el objetivo de este proyecto es hacer pruebas para
+implementarlo en el proyecto real de una aplicación de gimnasios.
+
+En la cuenta del usuario se crea un nuevo calendario llamado 'Instructor', en el cual
+se aplicarán los cambios generados mediante la aplicación.
 
 ## Requisitos Para Su Uso
 
@@ -12,7 +18,7 @@ Es necesario tener en Microsoft Entra ID una aplicación registrada con la sigui
 
 -Tipos de cuentas compatibles: Cuentas en cualquier directorio organizacional (cualquier inquilino 
 del id. de Microsoft Entra - multiinquilino) y cuentas personales de Microsoft (por ejemplo, Skype, Xbox).
--URI de redirección: Aplicación de página única - 'url local que ejecute Angular ej: http://localhost:4200'.
+-URI de redirección: Aplicación de página única - 'url local que ejecute Angular ej: <http://localhost:4200>.
 -Permisos de API: Calendars.ReadWrite, de tipo delegada, con permisos concedidos.
 -Autenticación: Permitir tokens de acceso e id.
 
@@ -25,12 +31,16 @@ Antes de ejecutar la aplicación, asegúrate de tener instalados los siguientes 
 - [Angular CLI](https://angular.io/cli) - Versión 12.0.0
 
 ### En el frontend
-`cd calendario-outlook-frontend`
-`npm install`
+```bash
+cd calendario-outlook-frontend
+npm install
+```
 
 ### En el backend
-`cd calendario-outlook-backend`
-`dotnet restore`
+```bash
+cd calendario-outlook-backend
+dotnet restore
+```
 
 ## Estructura del Proyecto
 

@@ -7,31 +7,29 @@ namespace CalendarioOutlook.Services
 {
     public class OutlookService
     {
-        private readonly ILogger<OutlookService> logger;
+
 
         public GraphServiceClient graphServiceClient { get; set; }
         public string idCalendarioInstructor { get; set; }
 
-        public OutlookService(ILogger<OutlookService> logger)
-        {
-            this.logger = logger;
-        }
+        public OutlookService() { }
 
+        // Método que asigna el token de acceso a GraphServiceClient y la ID del calendario instructor
         public void SetAccessToken(string accessToken)
         {
             if (string.IsNullOrEmpty(accessToken))
             {
                 throw new ArgumentException("El token de acceso es nulo o vacío.");
-            }            
-                        
+            }
+
             var tokenCredencial = new AccessTokenCredential(accessToken);
 
             graphServiceClient = new GraphServiceClient(tokenCredencial);
-            
+
             InitCalendarioId().GetAwaiter().GetResult();
         }
 
-        // Método que va a obtener la id del calendario instructor.
+        // Método que va a obtener la id del calendario instructor
         private async Task InitCalendarioId()
         {
             idCalendarioInstructor = await GetIdInstructorCalendario();
@@ -39,9 +37,9 @@ namespace CalendarioOutlook.Services
 
         public async Task<string> GetIdInstructorCalendario()
         {
-            // Se traen los calendarios del usuario.
+            // Se traen los calendarios del usuario
             var calendarios = await graphServiceClient.Me.Calendars.GetAsync();
-            // Si hay calendarios y existe el calendario Instructor, se devuelve su id.
+            // Si hay calendarios y existe el calendario Instructor, se devuelve su ID
             if (calendarios != null && calendarios.Value != null)
             {
                 foreach (var calendario in calendarios.Value)
@@ -53,12 +51,12 @@ namespace CalendarioOutlook.Services
                 }
             }
 
-            // Si no existe el calendario Instructor, se procede a crearlo.
+            // Si no existe el calendario Instructor, se procede a crearlo
             var calendarioInstructor = new Calendar
             { Name = "Instructor" };
-            // Se envía el calendario nuevo a la cuenta del usuario.
+            // Se envía el calendario nuevo a la cuenta del usuario
             var crearCalendario = await graphServiceClient.Me.Calendars.PostAsync(calendarioInstructor);
-            // Se retorna la id del calendario creado.
+            // Se retorna la id del calendario creado
             return crearCalendario.Id;
         }
 

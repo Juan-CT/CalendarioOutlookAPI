@@ -8,12 +8,10 @@ namespace CalendarioOutlook.Controllers
     public class OutlookController : ControllerBase
     {
         private readonly OutlookService outlookService;
-        private readonly ILogger<OutlookController> logger;
 
-        public OutlookController(OutlookService outlookService, ILogger<OutlookController> logger)
+        public OutlookController(OutlookService outlookService)
         {
             this.outlookService = outlookService;
-            this.logger = logger;
         }
 
         public class TokenRequest
@@ -21,15 +19,17 @@ namespace CalendarioOutlook.Controllers
             public string AccessToken { get; set; }
         }
 
+        // Método que recibe el token de acceso del usuario y se lleva al outlookService
         [HttpPost("token")]
         public IActionResult GetToken([FromBody] TokenRequest request)
         {
-            if (string.IsNullOrEmpty(request?.AccessToken)) {
+            if (string.IsNullOrEmpty(request?.AccessToken))
+            {
                 return BadRequest("Token no recibido");
-            }            
+            }
 
             outlookService.SetAccessToken(request.AccessToken);
             return Ok(new { message = "Token recibido" });
-        }        
+        }
     }
 }

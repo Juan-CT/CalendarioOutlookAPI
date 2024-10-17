@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { config } from './config';
 import * as msal from '@azure/msal-browser';
+import { environment } from '../environments/environment';
 import { Cita, CitaCreacion } from './cita';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators'
@@ -12,7 +13,7 @@ import { catchError } from 'rxjs/operators'
 
 export class AuthService {
 
-  private apiURL = 'https://localhost:7144/api/';
+  private apiURL = environment.apiEndpoint;
 
   // Necesario instanciar msal e inicializarla en los métodos correspondientes.
   private msalInstance: msal.PublicClientApplication = new msal.PublicClientApplication({

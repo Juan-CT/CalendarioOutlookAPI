@@ -65,8 +65,20 @@ export class AuthService {
     }
   }
 
-  estaLogueado():boolean {
-    return !!localStorage.getItem('accessToken');
+  // Método que comprueba si hay un token almacenado, para renoverlo y seguir logueado
+  async estaLogueado(): Promise<boolean> {
+    const token = localStorage.getItem('accessToken');
+
+    if (token) {
+      const tokenRenovado = await this.renovarToken();
+      // Si el token no se puede renovar, se elimina el existente en cache
+      if (!tokenRenovado) {
+        localStorage.removeItem('accessToken');
+        return false;
+      }
+      return true;
+    }
+    return false;
   }
 
   // Método que es llamado tras hacer login, para enviar el token al backend
@@ -78,6 +90,39 @@ export class AuthService {
           console.error('Error:', error.message);
           return throwError(error);
         }));
+  }
+
+  // Método que va a intentar renovar el token de acceso
+  async renovarToken(): Promise<string | null> {
+    await this.msalInstance!.initialize();
+    const cuenta = this.msalInstance.getAllAccounts()[0];
+
+    if (!cuenta) {
+      console.error("No existe una cuenta para renovar el token");
+      return null;
+    }
+
+    try {
+      const tokenResponse = await this.msalInstance.acquireTokenSilent({
+        scopes: ["User.Read", "Calendars.ReadWrite"],
+        account: cuenta
+      });
+      localStorage.setItem('accessToken', tokenResponse.accessToken);
+      // Se envía el nuevo token al backend
+      this.sendToken(tokenResponse.accessToken).subscribe(
+        (respuesta) => {
+          console.log('Token renovado enviado al backend', respuesta);
+        },
+        (error) => {
+          console.error('Error al enviar el token renovado al backend', error);
+        }
+      );
+
+      return tokenResponse.accessToken;
+    } catch {
+      console.error("Error al renovar el token");
+      return null;
+    }
   }
 
   // Método que envía la cita creada al backend

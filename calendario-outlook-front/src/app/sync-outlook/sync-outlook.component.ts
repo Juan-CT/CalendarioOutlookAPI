@@ -14,8 +14,8 @@ export class SyncOutlookComponent implements OnInit {
 
   constructor(private authService: AuthService) { }
 
-  ngOnInit(): void {
-    this.logueado = this.authService.estaLogueado();
+  async ngOnInit(): Promise<void> {
+    this.logueado = await this.authService.estaLogueado();
   }
 
   async login() {
